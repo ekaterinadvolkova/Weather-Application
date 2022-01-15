@@ -26,8 +26,8 @@ App is made with `SwiftUI`. It has a vertical layout. In the layout there are tw
 <img src="https://github.com/ekaterinadvolkova/Weather-Application/blob/main/Screens/RefreshScreen.PNG" alt="drawing" style="width:200px;"/> &emsp; &emsp; <img src="https://github.com/ekaterinadvolkova/Weather-Application/blob/main/Screens/LocationRequest.PNG" alt="drawing" style="width:200px;"/>  &emsp; &emsp; <img src="https://github.com/ekaterinadvolkova/Weather-Application/blob/main/Screens/Result.PNG" alt="drawing" style="width:200px;"/>
 
 ## Important before Cloning
-API key is deleted from github for safety reasons. You need to create your own key so make the app work.
-
+* API key is deleted from github for safety reasons. You need to create your own key so make the app work.
+* Corrent `line23` `WeatherAPIClient. swift`
 
 ## References
 The app is built with [this tutorial](https://betterprogramming.pub/simple-weather-app-with-swiftui-ac41200a9d4d).
