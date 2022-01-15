@@ -1,4 +1,4 @@
-# Weather Application
+# Weather Application :sunny: :cloud_with_lightning_and_rain:
 
 This app shows temperature and short weather report in the current position of the user.
 
