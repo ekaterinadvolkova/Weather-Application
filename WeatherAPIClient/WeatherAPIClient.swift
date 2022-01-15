@@ -1,9 +1,9 @@
 import Foundation
-
 import CoreLocation
+import SwiftUI
 
-final class WeatherAPIClient: NSObject, CLLocationManagerDelegate {
-    var currentWeather: WeatherValue?
+final class WeatherAPIClient: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var currentWeather: Weather?
     
     private let locationManager = CLLocationManager()
     private let dateFormatter = ISO8601DateFormatter()
@@ -20,14 +20,19 @@ final class WeatherAPIClient: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        guard let url = URL(string: "https://api.tomorrow.io/v4/timelines?location=\(location.coordinate.latitude),\(location.coordinate.longitude)&fields=temperature&fields=weatherCode&units=metric&timesteps=1h&startTime=\(dateFormatter.string(from: Date()))&endTime=\(dateFormatter.string(from: Date().addingTimeInterval(60 * 60)))&apikey={$YOUR_KEY}") else {
+        guard let url = URL(string: "https://api.tomorrow.io/v4/timelines?location=\(location.coordinate.latitude),\(location.coordinate.longitude)&fields=temperature&fields=weatherCode&units=metric&timesteps=1h&startTime=\(dateFormatter.string(from: Date()))&endTime=\(dateFormatter.string(from: Date().addingTimeInterval(60 * 60)))&apikey=9rDrhKhrfcQ4QQjEvOJxjJkcr9nkskj5") else {
             return
         }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            if let weatherResponse = try? JSONDecoder().decode(WeatherModel.self, from: data) {
-                currentWeather = weatherResponse.data.timelines.first?.intervals.first?.values
+            if let weatherResponse = try? JSONDecoder().decode(WeatherModel.self, from: data),
+               let weatherValue = weatherResponse.data.timelines.first?.intervals.first?.values,
+               let weatherCode = WeatherCode(rawValue: "\(weatherValue.weatherCode)") {
+                DispatchQueue.main.async { [weak self] in
+                    self?.currentWeather = Weather(temperature: Int(weatherValue.temperature),
+                                                   weatherCode: weatherCode)
+                }
             }
         } catch {
             // handle the error

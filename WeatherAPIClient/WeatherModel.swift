@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct WeatherModel: Codable {
     let data: WeatherData
@@ -117,4 +118,11 @@ enum WeatherCode: String, Codable {
             return Image(systemName: "cloud.bolt.fill")
         }
     }
+}
+
+struct Weather: Identifiable {
+    let id = UUID()
+    
+    let temperature: Int
+    let weatherCode: WeatherCode
 }
