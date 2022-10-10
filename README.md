@@ -29,5 +29,3 @@ App is made with `SwiftUI`. It has a vertical layout. In the layout there are tw
 * API key is deleted from github for safety reasons. You need to create your own key so make the app work.
 * Correct `line 23` in `WeatherAPIClient.swift` by adding your key instead of `{Key is deleted}`
 
-## References
-The app is built with [this tutorial](https://betterprogramming.pub/simple-weather-app-with-swiftui-ac41200a9d4d).
